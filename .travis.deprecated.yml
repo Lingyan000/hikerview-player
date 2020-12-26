@@ -31,6 +31,8 @@ install:
   - yarn
 script:
   - npm run release
+before_script:
+  - git lfs pull
 branches:
   only:
     - master

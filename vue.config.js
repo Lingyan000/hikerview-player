@@ -21,8 +21,31 @@ module.exports = {
 	pluginOptions: {
 		electronBuilder: {
 			builderOptions: {
-				appId: "com.hikerview.player",
+				appId: "com.Lingyan000.hikerviewplayer",
 				productName: '海阔视界播放器',
+				publish: [
+					{
+						provider: 'github',
+						owner: 'Lingyan000',
+						repo: 'hikerview-player',
+						releaseType: 'draft'
+					}
+				],
+				dmg: {
+					contents: [
+						{
+							x: 410,
+							y: 150,
+							type: 'link',
+							path: '/Applications'
+						},
+						{
+							x: 130,
+							y: 150,
+							type: 'file'
+						}
+					]
+				},
 				copyright: "Copyright © 2020",
 				win: {
 					icon: './public/app.ico',
