@@ -40,8 +40,7 @@ jobs:
       - name: Install system deps
         if: matrix.os == 'ubuntu-latest'
         run: |
-          sudo apt-get install --no-install-recommends -y icnsutils graphicsmagick xz-utils
-          sudo snap install snapcraft --classic
+          sudo apt-get install --no-install-recommends -y icnsutils graphicsmagick xz-utils snapcraft
       # step3: yarn
       - name: Yarn install
         run: |
