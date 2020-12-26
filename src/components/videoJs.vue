@@ -13,6 +13,17 @@
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 export default {
+  props: {
+    sources: {
+      type: Array,
+      default: [
+        {
+          type: "video/mp4",
+          src: "http://vjs.zencdn.net/v/oceans.mp4",
+        },
+      ],
+    },
+  },
   mounted() {
     this.myPlayer = videojs(
       "video",
@@ -26,13 +37,7 @@ export default {
         preload: "auto",
         // url
         // poster: 'https://static.shuxuejia.com/img/video_image.png', // 封面图片
-        sources: [
-          {
-            type: "video/mp4",
-            src:
-              "https://cloud189-shzh-corp.oos-gdsz.ctyunapi.cn/f1c5e56c-ae90-4da0-9be4-352d18a00673?response-content-disposition=attachment%3Bfilename%3D%22%C3%A6%C2%97%C2%A0%C3%A8%C2%80%C2%BB%C3%A5%C2%AE%C2%B6%C3%A5%C2%BA%C2%ADS11E01.mp4%22&x-amz-CLIENTNETWORK=UNKNOWN&x-amz-CLOUDTYPEIN=CORP&x-amz-CLIENTTYPEIN=UNKNOWN&Signature=jark3ntGHRmrgG7ufWg1APCLhcc%3D&AWSAccessKeyId=4549320003c8aac9538f&Expires=1608908262&x-amz-limitrate=102400&response-content-type=video/mp4&x-amz-FSIZE=801538234&x-amz-UID=172982920492925&x-amz-UFID=41540312235904327",
-          },
-        ],
+        sources: this.sources,
         playbackRates: [0.5, 1, 1.5, 2], //倍速播放
       },
       function onPlayerReady() {

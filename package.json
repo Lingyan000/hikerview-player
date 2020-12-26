@@ -9,11 +9,18 @@
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "patch": "npm version patch && git push origin master && git push origin --tags",
+    "minor": "npm version minor && git push origin master && git push origin --tags",
+    "major": "npm version major && git push origin master && git push origin --tags",
+    "release": "vue-cli-service electron:build"
   },
   "main": "background.js",
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "element-ui": "^2.14.1",
+    "js-cookie": "^2.2.1",
     "video.js": "7.7.5",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
