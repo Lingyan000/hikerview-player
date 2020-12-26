@@ -42,6 +42,7 @@ jobs:
         run: |
           snap --version
           sudo apt-get install --no-install-recommends -y icnsutils graphicsmagick xz-utils
+          snap install snapcraft --classic
       # step3: yarn
       - name: Yarn install
         run: |
