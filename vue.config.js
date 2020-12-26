@@ -48,7 +48,7 @@ module.exports = {
 				},
 				copyright: "Copyright © 2020",
 				win: {
-					icon: './public/app.ico',
+					icon: 'build/icons/icon.ico',
 					target: [
 						{
 							target: "nsis", // 利用nsis制作安装程序
@@ -60,13 +60,22 @@ module.exports = {
 					]
 				},
 				mac: {
-					icon: './public/app.png'
+					icon: 'build/icons/icon.icns',
+					extendInfo: {
+						LSUIElement: 1
+					}
 				},
 				nsis: {
 					"oneClick": false, // 是否一键安装
 					"allowToChangeInstallationDirectory": true, // 允许修改安装目录
 					"shortcutName": "海阔视界播放器", // 图标名称
 				},
+				linux: {
+					icon: 'build/icons/'
+				},
+				snap: {
+					publish: ['github']
+				}
 			},
 		}
 	}
