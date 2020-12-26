@@ -21,14 +21,25 @@ module.exports = {
 	pluginOptions: {
 		electronBuilder: {
 			builderOptions: {
+				appId: "com.hikerview.player",
+				productName: '海阔视界播放器',
+				copyright: "Copyright © 2020",
 				win: {
-					icon: './public/app.ico'
+					icon: './public/app.ico',
+					target: [
+						{
+							target: "nsis", // 利用nsis制作安装程序
+							arch: [
+								"x64", // 64位
+								"ia32" // 32位
+							]
+						}
+					]
 				},
 				mac: {
 					icon: './public/app.png'
 				}
 			},
-			productName: '海阔视界播放器'
 		}
 	}
 };
