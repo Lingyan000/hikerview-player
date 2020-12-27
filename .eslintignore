@@ -1,5 +1,1 @@
-build/*.js
-src
-public
 dist
-mock

@@ -22,7 +22,7 @@ init:
 install:
   - ps: Install-Product node 14 x64
   - git reset --hard HEAD
-  - yarn install
+  - yarn
   - node --version
 
 build_script:
