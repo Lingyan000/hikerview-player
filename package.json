@@ -1,6 +1,6 @@
 {
   "name": "hikerview-player",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -29,7 +29,9 @@
     }
   },
   "commitlint": {
-    "extends": ["./node_modules/@picgo/bump-version/commitlint-picgo"]
+    "extends": [
+      "./node_modules/@picgo/bump-version/commitlint-picgo"
+    ]
   },
   "dependencies": {
     "axios": "^0.21.1",
