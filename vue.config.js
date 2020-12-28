@@ -67,7 +67,7 @@ module.exports = {
         mac: {
           icon: 'build/icons/icon.icns',
           extendInfo: {
-            LSUIElement: 1
+            LSUIElement: 0
           }
         },
         nsis: {

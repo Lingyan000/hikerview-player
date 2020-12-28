@@ -28,7 +28,7 @@ windowList.set(IWindowList.MAIN_WINDOW, {
     }
   },
   callback (window) {
-    if (process.env.WEBPACK_DEV_SERVER_URL && !process.env.IS_TEST) window.webContents.openDevTools()
+    window.webContents.openDevTools()
     window.loadURL(MAIN_WINDOW_URL)
   }
 })
