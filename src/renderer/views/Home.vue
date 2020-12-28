@@ -60,12 +60,12 @@ export default {
     VideoPlayer
   },
   mounted () {
-    let ipAddressCookie = Cookies.get('ipAddress')
+    let ipAddress = this.$db.get('ipAddress')
     let reg = new RegExp(
       /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/
     )
-    if (reg.test(ipAddressCookie)) {
-      this.ipAddress = ipAddressCookie
+    if (reg.test(ipAddress)) {
+      this.ipAddress = ipAddress
     }
     this.$nextTick(() => {
       this.$refs.inAddressInput.focus()
@@ -81,11 +81,22 @@ export default {
           .get(`http://${this.ipAddress}:52020/playUrl`)
           .then((res) => {
             this.playUrl = res.data
-            this.videoOptions.sources[0].src = this.playUrl
+            if (this.playUrl.indexOf('.m3u8') !== -1) {
+              this.videoOptions.sources = [{
+                src: this.playUrl,
+                type: 'application/x-mpegURL'
+              }]
+            } else {
+              this.videoOptions.sources = [{
+                src: this.playUrl,
+                type: 'video/mp4'
+              }]
+            }
             this.visible = false
             this.$nextTick(() => {
               this.checkInterface()
-              Cookies.set('ipAddress', this.ipAddress)
+              this.$db.set('ipAddress', this.ipAddress)
+              // Cookies.set('ipAddress', this.ipAddress)
             })
           })
           .catch((e) => {
@@ -105,10 +116,17 @@ export default {
             .then((res) => {
               if (_this.playUrl !== res.data) {
                 _this.playUrl = res.data
-                _this.videoOptions.sources[0].src = _this.playUrl
-                _this.$nextTick(() => {
-                  Cookies.set('ipAddress', _this.ipAddress)
-                })
+                if (_this.playUrl.indexOf('.m3u8') !== -1) {
+                  _this.videoOptions.sources = [{
+                    src: _this.playUrl,
+                    type: 'application/x-mpegURL'
+                  }]
+                } else {
+                  _this.videoOptions.sources = [{
+                    src: _this.playUrl,
+                    type: 'video/mp4'
+                  }]
+                }
               }
             })
             .catch((e) => {

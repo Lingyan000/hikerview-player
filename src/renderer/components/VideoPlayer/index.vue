@@ -12,10 +12,12 @@ import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 import './custom-theme.css'
 import videojshotkeys from 'videojs-hotkeys'
+import hls from 'videojs-contrib-hls'
 
 window.videojs = videojs
 require('video.js/dist/lang/zh-CN.js')
 Vue.use(videojshotkeys)
+Vue.use(hls)
 
 // pollfill
 if (typeof Object.assign !== 'function') {

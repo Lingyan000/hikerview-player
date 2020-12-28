@@ -5,25 +5,16 @@ function resolve (dir) {
 }
 
 module.exports = {
-  publicPath: './',
-  devServer: {
-    host: '0.0.0.0',
-    port: 8080
-  },
-  configureWebpack: {
-    name: '海阔视界播放器',
-    resolve: {
-      alias: {
-        '@': resolve('src/renderer'),
-        '~': resolve('src'),
-        'root': resolve('./'),
-        '#': resolve('src/universal'),
-        'apis': resolve('src/main/apis')
-      }
-    }
+  chainWebpack: config => {
+    config.resolve.alias
+      .set('@', resolve('src/renderer'))
+      .set('~', resolve('src'))
+      .set('root', resolve('./'))
+      .set('#', resolve('src/universal'))
   },
   pluginOptions: {
     electronBuilder: {
+      nodeIntegration: true,
       customFileProtocol: 'hvp://./',
       externals: ['hvp'],
       chainWebpackMainProcess: config => {
