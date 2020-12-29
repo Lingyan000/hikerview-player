@@ -1,3 +1,12 @@
+## :tada: 0.1.14 (2020-12-29)
+
+
+### :bug: Bug Fixes
+
+* fix. Mac can’t open ([f70aa14](https://github.com/Lingyan000/hikerview-player/commit/f70aa14))
+
+
+
 ## :tada: 0.1.14-alpha.1 (2020-12-28)
 
 
