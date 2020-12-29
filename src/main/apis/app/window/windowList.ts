@@ -10,25 +10,34 @@ windowList.set(IWindowList.MAIN_WINDOW, {
   isValid: process.platform !== 'linux',
   multiple: false,
   options () {
-    return {
+    const options: IBrowserWindowOptions = {
       height: 600,
       width: 800,
       show: true,
       frame: true,
+      center: true,
       fullscreenable: true,
       resizable: true,
-      transparent: false,
+      title: '海阔视界播放器',
       vibrancy: 'ultra-dark',
+      transparent: true,
+      titleBarStyle: 'hidden',
       webPreferences: {
+        backgroundThrottling: false,
         nodeIntegration: true,
         nodeIntegrationInWorker: true,
-        backgroundThrottling: false
-      },
-      icon: `${__static}/app.ico`
+        webSecurity: false
+      }
     }
+    if (process.platform !== 'darwin') {
+      options.backgroundColor = '#3f3c37'
+      options.transparent = false
+      options.icon = `${__static}/app.ico`
+    }
+    return options
   },
   callback (window) {
-    window.webContents.openDevTools()
+    if (process.env.WEBPACK_DEV_SERVER_URL && !process.env.IS_TEST) window.webContents.openDevTools()
     window.loadURL(MAIN_WINDOW_URL)
   }
 })

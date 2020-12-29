@@ -1,4 +1,4 @@
-import { app, globalShortcut, protocol } from 'electron'
+import { app, globalShortcut, protocol, Menu } from 'electron'
 import {
   createProtocol
 } from 'vue-cli-plugin-electron-builder/lib'
@@ -23,8 +23,8 @@ class LifeCycle {
   private onReady () {
     app.on('ready', async () => {
       createProtocol('hvp')
-      // let menu = Menu.buildFromTemplate([])
-      // Menu.setApplicationMenu(menu)
+      let menu = Menu.buildFromTemplate([])
+      Menu.setApplicationMenu(menu)
       if (isDevelopment && !process.env.IS_TEST) {
         // Install Vue Devtools
         try {
