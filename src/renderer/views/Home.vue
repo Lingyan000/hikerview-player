@@ -34,6 +34,7 @@
 import axios from 'axios'
 import VideoPlayer from '@/components/VideoPlayer/index'
 import { remote, ipcRenderer } from 'electron'
+import { URL } from 'url'
 
 // Modify the user agent for all requests to the following urls.
 const filter = {
@@ -84,8 +85,11 @@ export default {
           let regBrace = /\{(.+?)\}/
           headersStr = headersStr.match(regBrace)[1]
           let headersArr = headersStr.split('&&')
+          let url = new URL(this.playUrl.split(';')[0])
+          let host = url.host
+          console.log(host)
           let filter = {
-            urls: ['*://*/*']
+            urls: [`*://${host}/*`]
           }
           ipcRenderer.send('uploadRequestHeaders', filter, headersArr)
         } catch (e) {

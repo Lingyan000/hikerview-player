@@ -16,7 +16,7 @@ export default {
             headersArr.forEach((header: string) => {
               let headerArr = header.split('@')
               let index = headerArr[0]
-              let value = headerArr[1].split('.js:')[0].replace(/；；/g, ';').replace(/%%/g, ';')
+              let value = headerArr[1].replace(/；；/g, ';').replace(/%%/g, ';').split('.js:')[0]
               details.requestHeaders[index] = value
             })
             let requestHeaders = { requestHeaders: details.requestHeaders }
@@ -28,7 +28,7 @@ export default {
             body: '糟糕...发生了一些错误，可能是 headers 有误'
           })
           notification.show()
-          console.error(e)
+          throw new Error(e)
         }
       }
     )
