@@ -31,9 +31,14 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie'
 import axios from 'axios'
 import VideoPlayer from '@/components/VideoPlayer/index'
+import { remote, ipcRenderer } from 'electron'
+
+// Modify the user agent for all requests to the following urls.
+const filter = {
+  urls: ['https://*.github.com/*', '*://electron.github.io']
+}
 
 export default {
   name: 'home',
@@ -72,6 +77,23 @@ export default {
     })
   },
   methods: {
+    setHeaders () {
+      let headersStr = this.playUrl.split(';')[1] || ''
+      if (headersStr !== '') {
+        try {
+          let regBrace = /\{(.+?)\}/
+          headersStr = headersStr.match(regBrace)[1]
+          let headersArr = headersStr.split('&&')
+          let filter = {
+            urls: ['*://*/*']
+          }
+          ipcRenderer.send('uploadRequestHeaders', filter, headersArr)
+        } catch (e) {
+          this.$message.error('糟糕...发生了一些错误，可能是 headers 有误')
+          console.error(e)
+        }
+      }
+    },
     confirm () {
       let reg = new RegExp(
         /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/
@@ -81,14 +103,15 @@ export default {
           .get(`http://${this.ipAddress}:52020/playUrl`)
           .then((res) => {
             this.playUrl = res.data
+            this.setHeaders()
             if (this.playUrl.indexOf('.m3u8') !== -1) {
               this.videoOptions.sources = [{
-                src: this.playUrl,
+                src: this.playUrl.split(';')[0],
                 type: 'application/x-mpegURL'
               }]
             } else {
               this.videoOptions.sources = [{
-                src: this.playUrl,
+                src: this.playUrl.split(';')[0],
                 type: 'video/mp4'
               }]
             }
@@ -96,7 +119,6 @@ export default {
             this.$nextTick(() => {
               this.checkInterface()
               this.$db.set('ipAddress', this.ipAddress)
-              // Cookies.set('ipAddress', this.ipAddress)
             })
           })
           .catch((e) => {
@@ -110,20 +132,20 @@ export default {
       let _this = this
       const timer = window.setInterval(() => {
         setTimeout(function () {
-          // chooseProduct 自己封装的axios请求
           axios
             .get(`http://${_this.ipAddress}:52020/playUrl`)
             .then((res) => {
               if (_this.playUrl !== res.data) {
                 _this.playUrl = res.data
+                _this.setHeaders()
                 if (_this.playUrl.indexOf('.m3u8') !== -1) {
                   _this.videoOptions.sources = [{
-                    src: _this.playUrl,
+                    src: _this.playUrl.split(';')[0],
                     type: 'application/x-mpegURL'
                   }]
                 } else {
                   _this.videoOptions.sources = [{
-                    src: _this.playUrl,
+                    src: _this.playUrl.split(';')[0],
                     type: 'video/mp4'
                   }]
                 }

@@ -4,6 +4,7 @@ import {
 } from 'vue-cli-plugin-electron-builder/lib'
 import beforeOpen from '~/main/utils/beforeOpen'
 import fixPath from 'fix-path'
+import ipcList from '~/main/events/ipcList'
 import { IWindowList } from 'apis/app/window/constants'
 import windowManager from 'apis/app/window/windowManager'
 import updateChecker from '~/main/utils/updateChecker'
@@ -19,6 +20,7 @@ class LifeCycle {
     // fix the $PATH in macOS
     fixPath()
     beforeOpen()
+    ipcList.listen()
   }
   private onReady () {
     app.on('ready', async () => {
