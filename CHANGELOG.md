@@ -1,3 +1,12 @@
+## :tada: 0.1.15 (2020-12-30)
+
+
+### :bug: Bug Fixes
+
+* fix the problem that disabling CORS is invalid ([915dfbd](https://github.com/Lingyan000/hikerview-player/commit/915dfbd))
+
+
+
 ## :tada: 0.1.15-alpha.2 (2020-12-30)
 
 
