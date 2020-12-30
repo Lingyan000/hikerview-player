@@ -1,3 +1,12 @@
+## :tada: 0.1.15-alpha.2 (2020-12-30)
+
+
+### :bug: Bug Fixes
+
+* fix some bugs ([22d3188](https://github.com/Lingyan000/hikerview-player/commit/22d3188))
+
+
+
 ## :tada: 0.1.15-alpha.1 (2020-12-30)
 
 
