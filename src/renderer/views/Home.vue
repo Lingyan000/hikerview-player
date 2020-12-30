@@ -87,7 +87,6 @@ export default {
           let headersArr = headersStr.split('&&')
           let url = new URL(this.playUrl.split(';')[0])
           let host = url.host
-          console.log(host)
           let filter = {
             urls: [`*://${host}/*`]
           }

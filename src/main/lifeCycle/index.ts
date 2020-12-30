@@ -17,6 +17,7 @@ class LifeCycle {
     protocol.registerSchemesAsPrivileged([
       { scheme: 'hvp', privileges: { secure: true, standard: true } }
     ])
+    app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors')
     // fix the $PATH in macOS
     fixPath()
     beforeOpen()
