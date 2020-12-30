@@ -1,3 +1,12 @@
+## :tada: 0.1.15-alpha.1 (2020-12-30)
+
+
+### :sparkles: Features
+
+* add support for headers ([8bd1a12](https://github.com/Lingyan000/hikerview-player/commit/8bd1a12))
+
+
+
 ## :tada: 0.1.15-alpha.0 (2020-12-29)
 
 
