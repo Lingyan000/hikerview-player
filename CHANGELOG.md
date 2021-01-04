@@ -1,3 +1,12 @@
+## :tada: 0.1.16-alpha.1 (2021-01-04)
+
+
+### :bug: Bug Fixes
+
+* bug fixs ([4d02a7f](https://github.com/Lingyan000/hikerview-player/commit/4d02a7f))
+
+
+
 ## :tada: 0.1.16-alpha.0 (2021-01-04)
 
 
