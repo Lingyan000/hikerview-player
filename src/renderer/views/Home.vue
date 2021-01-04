@@ -104,7 +104,7 @@ export default {
           })
           .then((res) => {
             this.playUrl = res.data.url
-            this.setHeaders(res.data.headers)
+            this.setHeaders(res.data.headers || {})
             if (this.playUrl.indexOf('.m3u8') !== -1) {
               this.videoOptions.sources = [{
                 src: this.playUrl.split(';')[0],
@@ -142,7 +142,7 @@ export default {
             .then((res) => {
               if (_this.playUrl !== res.data.url) {
                 _this.playUrl = res.data.url
-                _this.setHeaders(res.data.headers)
+                _this.setHeaders(res.data.headers || {})
                 if (_this.playUrl.indexOf('.m3u8') !== -1) {
                   _this.videoOptions.sources = [{
                     src: _this.playUrl.split(';')[0],
