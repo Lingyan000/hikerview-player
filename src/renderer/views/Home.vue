@@ -78,23 +78,17 @@ export default {
     })
   },
   methods: {
-    setHeaders () {
-      let headersStr = this.playUrl.split(';')[1] || ''
-      if (headersStr !== '') {
-        try {
-          let regBrace = /\{(.+?)\}/
-          headersStr = headersStr.match(regBrace)[1]
-          let headersArr = headersStr.split('&&')
-          let url = new URL(this.playUrl.split(';')[0])
-          let host = url.host
-          let filter = {
-            urls: [`*://${host}/*`]
-          }
-          ipcRenderer.send('uploadRequestHeaders', filter, headersArr)
-        } catch (e) {
-          this.$message.error('糟糕...发生了一些错误，可能是 headers 有误')
-          console.error(e)
+    setHeaders (headers) {
+      try {
+        let url = new URL(this.playUrl)
+        let host = url.host
+        let filter = {
+          urls: [`*://${host}/*`]
         }
+        ipcRenderer.send('uploadRequestHeaders', filter, headers)
+      } catch (e) {
+        this.$message.error('糟糕...发生了一些错误，可能是 headers 有误')
+        console.error(e)
       }
     },
     confirm () {
@@ -103,10 +97,14 @@ export default {
       )
       if (reg.test(this.ipAddress)) {
         axios
-          .get(`http://${this.ipAddress}:52020/playUrl`)
+          .get(`http://${this.ipAddress}:52020/playUrl`, {
+            params: {
+              enhance: true
+            }
+          })
           .then((res) => {
-            this.playUrl = res.data
-            this.setHeaders()
+            this.playUrl = res.data.url
+            this.setHeaders(res.data.headers)
             if (this.playUrl.indexOf('.m3u8') !== -1) {
               this.videoOptions.sources = [{
                 src: this.playUrl.split(';')[0],
@@ -136,11 +134,15 @@ export default {
       const timer = window.setInterval(() => {
         setTimeout(function () {
           axios
-            .get(`http://${_this.ipAddress}:52020/playUrl`)
+            .get(`http://${_this.ipAddress}:52020/playUrl`, {
+              params: {
+                enhance: true
+              }
+            })
             .then((res) => {
-              if (_this.playUrl !== res.data) {
-                _this.playUrl = res.data
-                _this.setHeaders()
+              if (_this.playUrl !== res.data.url) {
+                _this.playUrl = res.data.url
+                _this.setHeaders(res.data.headers)
                 if (_this.playUrl.indexOf('.m3u8') !== -1) {
                   _this.videoOptions.sources = [{
                     src: _this.playUrl.split(';')[0],

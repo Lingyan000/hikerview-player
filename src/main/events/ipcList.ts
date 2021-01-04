@@ -10,14 +10,11 @@ export default {
   listen () {
     ipcMain.on(
       'uploadRequestHeaders',
-      async (evt: IpcMainEvent, filter: Filter, headersArr) => {
+      async (evt: IpcMainEvent, filter: Filter, headers) => {
         try {
           session.defaultSession.webRequest.onBeforeSendHeaders(filter, (details, callback) => {
-            headersArr.forEach((header: string) => {
-              let headerArr = header.split('@')
-              let index = headerArr[0]
-              let value = headerArr[1].replace(/；；/g, ';').replace(/%%/g, ';').split('.js:')[0]
-              details.requestHeaders[index] = value
+            Object.keys(headers).forEach((key) => {
+              details.requestHeaders[key] = headers[key]
             })
             let requestHeaders = { requestHeaders: details.requestHeaders }
             callback(requestHeaders)
