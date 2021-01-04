@@ -70,6 +70,15 @@ npm run electron:build
 
 只需第一次构建的时候指定一下国内源即可。后续构建不需要特地指定。二进制文件下载在 `~/.electron/` 目录下。如果想要更新 `electron` 构建版本，可以删除 `~/.electron/` 目录，然后重新运行上一步，让 `electron-builder `去下载最新的 `electron` 二进制文件。
 
+## 鸣谢
+
+- [Electron](https://github.com/electron/electron) 使一切成为可能
+- [Vue.js](https://github.com/vuejs/vue) 渐进式
+ JavaScript 框架
+- [video.js](https://github.com/videojs/video.js) 好用的 H5 播放器
+- [PicGo](https://github.com/Molunerfinn/PicGo) 学习了这个项目的开发结构
+- [海阔视界](http://haikuoshijie.cn/) 没有它就没有这个项目
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
