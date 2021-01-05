@@ -85,8 +85,8 @@ export default {
         player.currentTime(this.jumpStartDuration)
       })
       player.on('timeupdate', () => {
-        if (this.jumpEndDuration > player.remainingTime()) {
-          player.pause()
+        if (this.jumpEndDuration > player.remainingTime() && player.remainingTime() > 0) {
+          player.currentTime(player.duration())
         }
       })
       player.Resume({

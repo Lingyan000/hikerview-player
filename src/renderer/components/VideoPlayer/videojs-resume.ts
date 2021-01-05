@@ -1,7 +1,6 @@
 import videojs from 'video.js'
-import Store from 'electron-store'
+import db from '#/datastore'
 
-const store = new Store()
 const Button = videojs.getComponent('Button')
 const Component = videojs.getComponent('Component')
 const ModalDialog = videojs.getComponent('ModalDialog')
@@ -65,7 +64,7 @@ class ResumeCancelButton extends Button {
 
   handleClick () {
     this.player_.resumeModal.close()
-    store.delete(this.options_.key)
+    db.get(`resume[${this.options_.key.replace(/\./g, '_')}]`)
   }
 }
 ResumeButton.prototype.controlText_ = 'No Thanks'
@@ -120,10 +119,6 @@ videojs.registerComponent('ModalButtons', ModalButtons)
 videojs.registerComponent('ResumeModal', ResumeModal)
 
 const Resume = function (this: any, options: any) {
-  if (!store) {
-    return videojs.log('store.js is not available')
-  }
-
   let videoId = options.uuid
   let title = options.title || 'Resume from where you left off?'
   let resumeButtonText = options.resumeButtonText || 'Resume'
@@ -133,15 +128,15 @@ const Resume = function (this: any, options: any) {
 
   this.on('timeupdate', function () {
     // @ts-ignore
-    store.set(key, this.currentTime())
+    db.set(`resume[${key.replace(/\./g, '_')}]`, this.currentTime())
   })
 
   this.on('ended', function () {
-    store.delete(key)
+    db.read().unset(`resume[${key.replace(/\./g, '_')}]`).write()
   })
 
   this.ready(function () {
-    let resumeFromTime:number = store.get(key) as number
+    let resumeFromTime:number = db.get(`resume.${key.replace(/\./g, '_')}`) as number
 
     if (resumeFromTime) {
       if (resumeFromTime >= 5) {

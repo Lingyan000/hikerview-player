@@ -37,7 +37,6 @@
     "axios": "^0.21.1",
     "core-js": "^3.8.1",
     "dayjs": "^1.9.7",
-    "electron-store": "^6.0.1",
     "element-ui": "^2.14.1",
     "fix-path": "^3.0.0",
     "fs-extra": "^9.0.1",
@@ -80,7 +79,7 @@
     "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
-    "typescript": "~3.9.3",
+    "typescript": "3.9.3",
     "vue-cli-plugin-electron-builder": "~2.0.0-rc.5",
     "vue-template-compiler": "^2.6.11"
   },
