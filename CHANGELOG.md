@@ -1,3 +1,17 @@
+## :tada: 0.1.16-alpha.3 (2021-01-05)
+
+
+### :sparkles: Features
+
+* new function of progress bar ([6d9536f](https://github.com/Lingyan000/hikerview-player/commit/6d9536f))
+
+
+### :bug: Bug Fixes
+
+* 修复成功 Build 的问题 ([b0c08eb](https://github.com/Lingyan000/hikerview-player/commit/b0c08eb))
+
+
+
 ## :tada: 0.1.16-alpha.2 (2021-01-05)
 
 
