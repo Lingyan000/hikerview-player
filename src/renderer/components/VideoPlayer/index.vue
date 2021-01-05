@@ -13,6 +13,8 @@ import 'video.js/dist/video-js.css'
 import './custom-theme.css'
 import videojshotkeys from 'videojs-hotkeys'
 import hls from 'videojs-contrib-hls'
+import './videojs-resume'
+import './videojs-resume.css'
 
 window.videojs = videojs
 require('video.js/dist/lang/zh-CN.js')

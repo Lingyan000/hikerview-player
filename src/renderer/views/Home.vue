@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <video-player class="videoPlayer" style="height: 100vh; width: 100vw" :options="videoOptions"/>
+    <video-player @ready="videoReady" class="videoPlayer" style="height: 100vh; width: 100vw" :options="videoOptions"/>
     <el-dialog
       :show-close="false"
       :close-on-press-escape="false"
@@ -45,6 +45,8 @@ export default {
   name: 'home',
   data () {
     return {
+      jumpStartDuration: 0,
+      jumpEndDuration: 0,
       visible: true,
       ipAddress: '',
       playUrl: '',
@@ -78,6 +80,23 @@ export default {
     })
   },
   methods: {
+    videoReady (player) {
+      player.on('loadedmetadata', () => {
+        player.currentTime(this.jumpStartDuration)
+      })
+      player.on('timeupdate', () => {
+        if (this.jumpEndDuration > player.remainingTime()) {
+          player.pause()
+        }
+      })
+      player.Resume({
+        uuid: this.playUrl,
+        playbackOffset: 5,
+        title: '恢复上次播放进度？',
+        resumeButtonText: '是',
+        cancelButtonText: '否'
+      })
+    },
     setHeaders (headers) {
       try {
         let url = new URL(this.playUrl)
@@ -104,6 +123,8 @@ export default {
           })
           .then((res) => {
             this.playUrl = res.data.url
+            this.jumpStartDuration = res.data.jumpStartDuration
+            this.jumpEndDuration = res.data.jumpEndDuration
             this.setHeaders(res.data.headers || {})
             if (this.playUrl.indexOf('.m3u8') !== -1) {
               this.videoOptions.sources = [{

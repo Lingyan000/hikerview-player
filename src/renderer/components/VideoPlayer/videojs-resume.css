@@ -1,0 +1,31 @@
+.vjs-default-skin .vjs-resume-modal .vjs-resume-modal-buttons {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #111;
+  color: #fff;
+  margin: 0 auto;
+  padding: 10px 0;
+  font-size: 14px;
+  width: 225px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.vjs-default-skin .vjs-resume-modal .vjs-resume-modal-buttons p {
+  margin: 0 0 10px 0;
+}
+
+.vjs-default-skin .vjs-resume-modal .vjs-resume-modal-buttons button {
+  color: #fff;
+  padding: 10px;
+  background-color: #42a5f5;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.vjs-default-skin .vjs-resume-modal .vjs-resume-modal-buttons button:hover {
+  background-color: #90caf9;
+}
