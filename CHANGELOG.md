@@ -1,3 +1,12 @@
+## :tada: 0.1.16-alpha.4 (2021-01-06)
+
+
+### :bug: Bug Fixes
+
+* fix errors caused by ports ([b4e2b87](https://github.com/Lingyan000/hikerview-player/commit/b4e2b87))
+
+
+
 ## :tada: 0.1.16-alpha.3 (2021-01-05)
 
 
