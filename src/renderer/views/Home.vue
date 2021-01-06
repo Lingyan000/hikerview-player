@@ -36,11 +36,6 @@ import VideoPlayer from '@/components/VideoPlayer/index'
 import { remote, ipcRenderer } from 'electron'
 import { URL } from 'url'
 
-// Modify the user agent for all requests to the following urls.
-const filter = {
-  urls: ['https://*.github.com/*', '*://electron.github.io']
-}
-
 export default {
   name: 'home',
   data () {
@@ -100,9 +95,9 @@ export default {
     setHeaders (headers) {
       try {
         let url = new URL(this.playUrl)
-        let host = url.host
+        let hostname = url.hostname
         let filter = {
-          urls: [`*://${host}/*`]
+          urls: [`*://${hostname}:*/*`]
         }
         ipcRenderer.send('uploadRequestHeaders', filter, headers)
       } catch (e) {

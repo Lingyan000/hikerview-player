@@ -14,7 +14,7 @@ export default {
         try {
           session.defaultSession.webRequest.onBeforeSendHeaders(filter, (details, callback) => {
             Object.keys(headers).forEach((key) => {
-              details.requestHeaders[key] = headers[key]
+              details.requestHeaders[key] = headers[key].replace(/；；/g, ';').replace(/%%/g, ';').split('.js:')[0]
             })
             let requestHeaders = { requestHeaders: details.requestHeaders }
             callback(requestHeaders)

@@ -36,7 +36,7 @@ Linux 用户请下载 `AppImage` 文件。
 
 ## 应用截图
 
-![](https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20210104220019.png)
+![](https://cdn.jsdelivr.net/gh/Lingyan000/photos/img/20210106110604.gif)
 
 ## 开发说明
 
