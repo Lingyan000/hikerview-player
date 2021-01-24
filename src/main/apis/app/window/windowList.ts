@@ -21,7 +21,7 @@ windowList.set(IWindowList.MAIN_WINDOW, {
       title: '海阔视界播放器',
       vibrancy: 'ultra-dark',
       transparent: true,
-      titleBarStyle: 'hidden',
+      // titleBarStyle: 'hidden',
       webPreferences: {
         backgroundThrottling: false,
         nodeIntegration: true,
