@@ -10,6 +10,7 @@
       width="40%"
     >
       <div style="text-align: center">
+        <div style="margin: 0 0 20px 0; font-size: 13px;">海阔视界的播放器页面点击网页投屏按钮即可看到IP地址，请确保手机和电脑在同一个局域网</div>
         <el-input
           ref="inAddressInput"
           v-model="ipAddress"
