@@ -141,7 +141,7 @@ export default {
     }
   },
   methods: {
-    initialize () {
+    initialize (update = false) {
       // videojs options
       const videoOptions = Object.assign({}, this.globalOptions, this.options)
       // ios fullscreen
@@ -174,34 +174,38 @@ export default {
       // console.log('videoOptions', videoOptions)
 
       // player
-      const self = this
-      this.player = videojs(this.$refs.video, videoOptions, function () {
-        this.hotkeys({
-          volumeStep: 0.1,
-          seekStep: 5,
-          enableModifiersForNumbers: false
-        })
-        // events
-        const events = DEFAULT_EVENTS.concat(self.events).concat(self.globalEvents)
-        // watch events
-        const onEdEvents = {}
-        for (let i = 0; i < events.length; i++) {
-          if (typeof events[i] === 'string' && onEdEvents[events[i]] === undefined) {
-            (event => {
-              onEdEvents[event] = null
-              this.on(event, () => {
-                emitPlayerState(event, true)
-              })
-            })(events[i])
+      if (!update) {
+        const self = this
+        this.player = videojs(this.$refs.video, videoOptions, function () {
+          this.hotkeys({
+            volumeStep: 0.1,
+            seekStep: 5,
+            enableModifiersForNumbers: false
+          })
+          // events
+          const events = DEFAULT_EVENTS.concat(self.events).concat(self.globalEvents)
+          // watch events
+          const onEdEvents = {}
+          for (let i = 0; i < events.length; i++) {
+            if (typeof events[i] === 'string' && onEdEvents[events[i]] === undefined) {
+              (event => {
+                onEdEvents[event] = null
+                this.on(event, () => {
+                  emitPlayerState(event, true)
+                })
+              })(events[i])
+            }
           }
-        }
-        // watch timeupdate
-        this.on('timeupdate', function () {
-          emitPlayerState('timeupdate', this.currentTime())
+          // watch timeupdate
+          this.on('timeupdate', function () {
+            emitPlayerState('timeupdate', this.currentTime())
+          })
+          // player readied
+          self.$emit('ready', this)
         })
-        // player readied
-        self.$emit('ready', this)
-      })
+      } else {
+        this.player.src(videoOptions.sources)
+      }
     },
     dispose (callback) {
       if (this.player && this.player.dispose) {
@@ -233,11 +237,15 @@ export default {
     options: {
       deep: true,
       handler (options, oldOptions) {
-        this.dispose(() => {
-          if (options && options.sources && options.sources.length) {
-            this.initialize()
+        if (options && options.sources && options.sources.length) {
+          if (oldOptions != null && oldOptions.sources != null && oldOptions.sources.length) {
+            this.initialize(true)
+          } else {
+            this.dispose(() => {
+              this.initialize()
+            })
           }
-        })
+        }
       }
     }
   }
