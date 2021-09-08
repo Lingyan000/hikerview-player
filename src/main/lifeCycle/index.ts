@@ -12,6 +12,8 @@ import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import db from '#/datastore'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+const isMac = process.platform === 'darwin'
+
 class LifeCycle {
   private beforeReady () {
     protocol.registerSchemesAsPrivileged([
@@ -26,7 +28,10 @@ class LifeCycle {
   private onReady () {
     app.on('ready', async () => {
       createProtocol('hvp')
-      let menu = Menu.buildFromTemplate([])
+      let menu = Menu.buildFromTemplate(isMac ? [{
+        label: app.name,
+        submenu: [{ role: 'about' }, { role: 'quit' }]
+      }] : [])
       Menu.setApplicationMenu(menu)
       if (isDevelopment && !process.env.IS_TEST) {
         // Install Vue Devtools
@@ -64,7 +69,7 @@ class LifeCycle {
   }
   private onQuit () {
     app.on('window-all-closed', () => {
-      if (process.platform !== 'darwin') {
+      if (!isMac) {
         app.quit()
       }
     })

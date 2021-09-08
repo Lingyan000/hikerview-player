@@ -1,5 +1,5 @@
 <div align="center">
-<img alt="Coolapk LOGO" src="./build/icons/256x256.png" width="150px" />
+<img alt="HikerView LOGO" src="./build/icons/256x256.png" width="150px" />
 
 # Hikerview Player
 

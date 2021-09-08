@@ -19,7 +19,7 @@ windowList.set(IWindowList.MAIN_WINDOW, {
       fullscreenable: true,
       resizable: true,
       title: '海阔视界播放器',
-      vibrancy: 'ultra-dark',
+      // vibrancy: 'ultra-dark',
       // transparent: true,
       // titleBarStyle: 'hidden',
       webPreferences: {
