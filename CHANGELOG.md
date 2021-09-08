@@ -1,3 +1,17 @@
+## :tada: 0.1.19 (2021-09-08)
+
+
+### :sparkles: Features
+
+* **macos majorization:** macOS 优化 ([98ae5ce](https://github.com/Lingyan000/hikerview-player.git/commit/98ae5ce))
+
+
+### :zap: Performance Improvements
+
+* **video:** donot recreate player when srouce update ([6b6e59c](https://github.com/Lingyan000/hikerview-player.git/commit/6b6e59c))
+
+
+
 ## :tada: 0.1.18 (2021-09-08)
 
 
