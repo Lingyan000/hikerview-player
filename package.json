@@ -1,6 +1,6 @@
 {
   "name": "hikerview-player",
-  "version": "0.1.18-alpha.1",
+  "version": "0.1.18",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
