@@ -12,3 +12,10 @@ html {
 :focus {
   outline: none !important;
 }
+
+@font-face {
+  font-family: 'iconfont';  /* Project id 2806478 */
+  src: url('//at.alicdn.com/t/font_2806478_g43exceyrs5.woff2?t=1631364862905') format('woff2'),
+  url('//at.alicdn.com/t/font_2806478_g43exceyrs5.woff?t=1631364862905') format('woff'),
+  url('//at.alicdn.com/t/font_2806478_g43exceyrs5.ttf?t=1631364862905') format('truetype');
+}

@@ -104,7 +104,9 @@ export default {
           }
         },
         techOrder: ['html5'],
-        plugins: {}
+        plugins: {
+          customPlugin: { name: 'customName' }
+        }
       })
     },
     globalEvents: {
@@ -123,6 +125,7 @@ export default {
     }
   },
   mounted () {
+    this.customPlugin()
     if (!this.player) {
       this.initialize()
     }
@@ -141,6 +144,56 @@ export default {
     }
   },
   methods: {
+    customPlugin () {
+      const vjs = window.videojs
+      const self = this
+      const customPlugin = function () {
+        const player = this
+
+        // 方式多次加载，再销毁之前
+        if (!player.el()) {
+          return
+        }
+
+        const customButtom = videojs.getComponent('Button')
+        const selectionsButton = videojs.extend(customButtom, {
+          constructor: function (player, options) {
+            customButtom.call(this, player, options)
+            this.controlText('选集')
+          },
+          handleClick: function () {
+            self.$emit('handle-selections')
+          },
+          buildCSSClass: function () {
+            return 'vjs-selections-control vjs-control vjs-button'
+          }
+        })
+        const nextButton = videojs.extend(customButtom, {
+          constructor: function (player, options) {
+            customButtom.call(this, player, options)
+            this.controlText('下一集')
+          },
+          handleClick: function () {
+            self.$emit('handle-next')
+          },
+          buildCSSClass: function () {
+            return 'vjs-next-control vjs-control vjs-button'
+          }
+        })
+        videojs.registerComponent('selectionsButton', selectionsButton)
+        videojs.registerComponent('nextButton', nextButton)
+
+        player.one('loadstart', function () {
+          const selectionsButtomBtn = player.controlBar.addChild('selectionsButton', {})
+          const nextButtonBtn = player.controlBar.addChild('nextButton', {})
+          console.log(player.controlBar)
+          player.controlBar.el().insertBefore(selectionsButtomBtn.el(), player.controlBar.fullscreenToggle.el())
+          player.controlBar.el().insertBefore(nextButtonBtn.el(), player.controlBar.volumePanel.el())
+        })
+      }
+      vjs.registerPlugin('customPlugin', customPlugin)
+    },
+
     initialize (update = false) {
       // videojs options
       const videoOptions = Object.assign({}, this.globalOptions, this.options)
@@ -251,3 +304,33 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.vjs-selections-control.vjs-control.vjs-button {
+  cursor: pointer;
+  flex: none;
+}
+.video-js .vjs-selections-control .vjs-icon-placeholder {
+  font-family: iconfont!important;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.video-js .vjs-selections-control .vjs-icon-placeholder:before {
+  content: "\e607";
+}
+
+.vjs-next-control.vjs-control.vjs-button {
+  cursor: pointer;
+  flex: none;
+}
+.video-js .vjs-next-control .vjs-icon-placeholder {
+  font-family: VideoJS!important;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.video-js .vjs-next-control .vjs-icon-placeholder:before {
+  content: "\f11f";
+}
+</style>
