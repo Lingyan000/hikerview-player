@@ -1,3 +1,12 @@
+## :tada: 0.1.20 (2021-09-12)
+
+
+### :sparkles: Features
+
+* 添加下一集和选集列表按钮 ([ad2de8a](https://github.com/Lingyan000/hikerview-player/commit/ad2de8a))
+
+
+
 ## :tada: 0.1.19 (2021-09-08)
 
 
